@@ -162,6 +162,60 @@
             "creationDate": "Mon, 21 Sep 2026 07:51:06 GMT",
             "ts": "Mon, 21 Sep 2026 07:51:06 GMT",
             "publishState": "published"
+        },
+        "0.3.0": {
+            "manifest": {
+                "manifestVersion": 2,
+                "id": "cloud.hygieia.intranet",
+                "title": "HYGIEIA.net Intranet",
+                "tagline": "Bestellungen, Urlaub und Abwesenheiten",
+                "description": "Das Intranet der HYGIEIA.net-Praxisgruppe: Bestellanforderungen,\nUrlaubs- und Abwesenheitsanträge mit Genehmigungswegen, Teamkalender und\nAuswertungen für die Personalabteilung.\n\nDie Anmeldung läuft über Keycloak (OpenID Connect).\n",
+                "changelog": "* Die erste Anmeldung wird automatisch mit dem passenden, vorab angelegten Personendatensatz verbunden, wenn die Mailadresse eindeutig passt.\n* Technische Zugänge werden ausdrücklich gekennzeichnet und sind von Personen getrennt.\n* Eine Anmeldung gehört höchstens einer Person.\n* Rollen lassen sich erst vergeben, wenn sich eine Person angemeldet hat, und gehen nicht mehr stillschweigend verloren.\n* Übersichtlichere Liste der Anmeldungen ohne Zuordnung, korrekte Schreibweise der Seitentitel.\n",
+                "postInstallMessage": "Die App startet ohne Mitarbeitende und ohne Anmeldung.\n\n1. In der Dateiverwaltung der App `/app/data/env` öffnen, das\n   Client-Secret aus Keycloak und die Zugangsdaten des Mail-Postfachs\n   eintragen.\n2. Die App neu starten.\n3. Die übrigen Schritte stehen in der Einrichtungsanleitung.\n",
+                "version": "0.3.0",
+                "website": "https://hygieia.cloud",
+                "packagerName": "axxon-service",
+                "packagerUrl": "https://axxon-service.de",
+                "iconUrl": "https://raw.githubusercontent.com/axxonservice/hygieia-intranet-cloudron/main/icon.png",
+                "mediaLinks": [
+                    "https://raw.githubusercontent.com/axxonservice/hygieia-intranet-cloudron/main/icon.png"
+                ],
+                "tags": [
+                    "productivity"
+                ],
+                "minBoxVersion": "9.1.0",
+                "httpPort": 8000,
+                "healthCheckPath": "/up",
+                "memoryLimit": 1073741824,
+                "addons": {
+                    "localstorage": {},
+                    "postgresql": {},
+                    "scheduler": {
+                        "zeitplan": {
+                            "schedule": "* * * * *",
+                            "command": "/app/pkg/zeitplan.sh"
+                        }
+                    }
+                },
+                "checklist": {
+                    "einstellungen": {
+                        "message": "In /app/data/env das Client-Secret aus Keycloak und die Zugangsdaten des Mail-Postfachs eintragen, danach die App neu starten."
+                    },
+                    "keycloak": {
+                        "message": "Im Keycloak-Client die Adressen dieser App eintragen: Rücksprungadresse <Adresse>/auth/keycloak/callback, nach dem Abmelden <Adresse>/abgemeldet und <Adresse>/zugang-beendet."
+                    },
+                    "notfallzugaenge": {
+                        "message": "Nach der ersten Anmeldung der Notfallzugänge im Web-Terminal die Rollen vergeben: /app/pkg/artisan rollen:vergib <Anmeldename> mitarbeiter geschaeftsleitung"
+                    },
+                    "aktualisierung": {
+                        "message": "Produktiv: automatische Aktualisierungen abschalten. Testumgebung: eingeschaltet lassen."
+                    }
+                },
+                "dockerImage": "ghcr.io/axxonservice/hygieia-intranet:0.3.0"
+            },
+            "creationDate": "Mon, 21 Sep 2026 10:00:34 GMT",
+            "ts": "Mon, 21 Sep 2026 10:00:34 GMT",
+            "publishState": "published"
         }
     }
 }
